@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class PremiumUsersConfig(AppConfig):
+class TvOutConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'premium_users'
+    name = 'apps.tv_out'

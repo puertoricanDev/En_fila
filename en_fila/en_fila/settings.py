@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'homepage',
     'apps.management',
     'apps.mi_fila',
+    'apps.premium',
+    'apps.tv_out',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
