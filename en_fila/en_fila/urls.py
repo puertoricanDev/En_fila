@@ -21,6 +21,6 @@ urlpatterns = [
     path("",include('homepage.urls')),
     path("management/", include('apps.management.urls')),
     path("mi_fila/", include('apps.mi_fila.urls')),
-    #path("premium/", include('apps.premium.urls')),
-    #path("tv_out/", include('apps.tv_out.urls')),
+    path("premium/", include('apps.premium.urls')),
+    path("tv_out/", include('apps.tv_out.urls')),
 ]

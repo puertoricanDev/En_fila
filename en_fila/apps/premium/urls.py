@@ -3,5 +3,5 @@ from django.views.generic.base import RedirectView
 from . import views
 
 urlpatterns = [
-    path('', views.mi_filaAPI, name='mi_filaAPI'),
+    path('', views.premiumUsr, name='premiumUsr'),
 ]
