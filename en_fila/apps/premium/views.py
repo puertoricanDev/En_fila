@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import *
+from .models import User
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -21,19 +21,18 @@ def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
-        salonName = request.POST["salon_name"]
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
-            return render(request, "saloninventory/register.html", {
+            return render(request, "premium/register.html", {
                 "message": "Passwords must match."
             })
 
         # Attempt to create new user
         try:
             user = User.objects.create_user(
-                username, email, password, first_name=salonName)
+                username, email, password)
             user.save()
 
         except IntegrityError:
@@ -59,7 +58,7 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "saloninventory/login.html", {
+            return render(request, "premium/login.html", {
                 "message": "Invalid username and/or password."
             })
     else:

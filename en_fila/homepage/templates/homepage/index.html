@@ -3,5 +3,8 @@
 <html lang="en">
   {% block body %}
   Hola mundo en fila.
+  {{message}}
+  {{request.user.date_joined}}
+  {{request.user.is_active}}
   {% endblock %}
 </html>
