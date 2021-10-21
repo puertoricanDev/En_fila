@@ -63,3 +63,8 @@ def login_view(request):
             })
     else:
         return render(request, "premium/login.html")
+
+
+def logout_view(request):
+    logout(request)
+    return render(request, "premium/login.html")
