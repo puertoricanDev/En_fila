@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'apps.mi_fila',
     'apps.premium',
     'apps.tv_out',
-    "phonenumber_field",
+    'phonenumber_field',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

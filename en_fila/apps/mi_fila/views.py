@@ -14,4 +14,4 @@ from decimal import *
 
 
 def mi_filaAPI(request):
-    return JsonResponse({'name':'En Fila', 'developers': 'Leancarlo Ruiz Edwuin Charon'}, safe=False)
+    return JsonResponse({'name':'En Fila', 'developers': 'Leancarlo Ruiz Edwin Charon'}, safe=False)
