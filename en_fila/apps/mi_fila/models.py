@@ -9,6 +9,7 @@ from django.utils import timezone
 class mi_fila(models.Model):
     owner = models.ForeignKey("premium.Suscribed", on_delete=models.CASCADE, related_name="owner")
     owner_places = models.CharField(max_length=45)
+    place_id = models.IntegerField
     persona = models.CharField(max_length=50)
     llegada = models.DateTimeField(default=timezone.now)
     posicion = models.PositiveIntegerField(blank=False)
