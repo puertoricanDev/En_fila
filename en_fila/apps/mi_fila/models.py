@@ -9,14 +9,14 @@ from django.utils import timezone
 class mi_fila(models.Model):
     owner = models.ForeignKey("premium.Suscribed", on_delete=models.CASCADE, related_name="owner")
     owner_places = models.CharField(max_length=45)
-    place_id = models.IntegerField
+    place_id = models.IntegerField(unique=True,blank=False)
     persona = models.CharField(max_length=50)
     llegada = models.DateTimeField(default=timezone.now)
     posicion = models.PositiveIntegerField(blank=False)
 
     def serialize(self):
         return {
-            "fila_id": self.id,
+            "fila_id": self.place_id,
             "lugar" : self.owner_places,
             "posicion": self.posicion,
             "persona": self.persona,

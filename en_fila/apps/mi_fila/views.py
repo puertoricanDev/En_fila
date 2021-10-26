@@ -14,7 +14,12 @@ from decimal import *
 
 
 def mi_filaAPI(request):
-    fila_id = request.GET.get("fila_id")
-    patient = mi_fila.objects.filter(id=fila_id)
-
-    return JsonResponse([patient.serialize()], safe=False)
+    place_id = request.GET.get("fila")
+    try:
+        patient = mi_fila.objects.get(place_id= place_id)
+        print(patient.owner.id)
+    except mi_fila.DoesNotExist:
+        return JsonResponse({"message":"Id de paciente no encontrado, favor corroborar su numero e intentar de nuevo."})
+    return JsonResponse(patient.serialize(), safe=False)
+        
+    
