@@ -1,7 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
   {% block body %}
-  Hola mundo en fila.
-  Desde Management.
+  <form
+    action="{% url 'managementIndex' %}"
+    method="post"
+    style="text-align: center; max-width: 40rem; margin: auto"
+  >
+    {% csrf_token %}
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="text"
+        name="place0"
+        placeholder="Nombre de Area"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="text"
+        name="place1"
+        placeholder="Nombre de Area"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="text"
+        name="place2"
+        placeholder="Nombre de Area"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="text"
+        name="place3"
+        placeholder="Nombre de Area"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        type="text"
+        name="place4"
+        placeholder="Nombre de Area"
+      />
+    </div>
+    <input class="btn btn-primary" type="submit" value="Update" />
+  </form>
+
   {% endblock %}
 </html>
