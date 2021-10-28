@@ -21,7 +21,6 @@ def managementpages(request):
             place_name = request.POST["place"+str(x)]
             try:
                 owner_areas = Owner_areas.objects.get(owner=owner, place_id=x)
-                print(owner_areas)
                 owner_areas.place_name = place_name
             except Owner_areas.DoesNotExist:
                 owner_areas = Owner_areas(
