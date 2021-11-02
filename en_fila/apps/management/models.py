@@ -5,4 +5,5 @@ from ..premium.models import Suscribed
 class Owner_areas(models.Model):
     owner = models.ForeignKey("premium.Suscribed", on_delete=models.CASCADE)
     place_name = models.CharField(max_length=45)
-    place_id = models.IntegerField(blank=False)
+    area_id = models.IntegerField(blank=False)
+    current_position = models.IntegerField(blank=False, default=0)

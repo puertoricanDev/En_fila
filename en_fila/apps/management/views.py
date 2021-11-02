@@ -20,13 +20,14 @@ def managementpages(request):
         for x in range(4):
             place_name = request.POST["place"+str(x)]
             try:
-                owner_areas = Owner_areas.objects.get(owner=owner, place_id=x)
+                owner_areas = Owner_areas.objects.get(owner=owner, area_id=x)
                 owner_areas.place_name = place_name
             except Owner_areas.DoesNotExist:
                 owner_areas = Owner_areas(
                     owner=owner,
                     place_name=place_name,
-                    place_id=x
+                    area_id=x
                 )
             owner_areas.save()
     return render(request, "management/index.html")
+
