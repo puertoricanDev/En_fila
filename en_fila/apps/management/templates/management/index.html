@@ -49,6 +49,7 @@
     </div>
     <input class="btn btn-primary" type="submit" value="Update" />
   </form>
+  <button id="next">next</button>
 <script>
   const En_filaSocket = new WebSocket(
         'ws://'
@@ -57,7 +58,7 @@
         + 1
         + '/'
     );
-  document.querySelector('#chat-message-submit').onclick = function(e) {
+  document.querySelector('#next').onclick = function(e) {
             //const messageInputDom = document.querySelector('#chat-message-input');
             //const message = messageInputDom.value;
             En_filaSocket.send(JSON.stringify({
