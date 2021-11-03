@@ -23,5 +23,6 @@ urlpatterns = [
     path("mi_fila/", include('apps.mi_fila.urls')),
     path("premium/", include('apps.premium.urls')),
     path("tv_out/", include('apps.tv_out.urls')),
+    path("ws/mi_area/", include('apps.mi_fila.routing')),
     
 ]

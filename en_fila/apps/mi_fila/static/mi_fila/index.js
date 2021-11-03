@@ -5,20 +5,20 @@ document.addEventListener('DOMContentLoaded', function(){
 function get_position(){
     const area_id = document.getElementById('area_id').getAttribute('name');
     console.log(area_id)
-    // const chatSocket = new WebSocket(
-    //     'ws://'
-    //     + window.location.host
-    //     + '/ws/mi_fila/'
-    //     + area_id
-    //     + '/'
-    // );
-    // chatSocket.onmessage = function(e) {
-    //     const data = JSON.parse(e.data);
-    //     console.log(data)
-    //     document.getElementById('area_id').value = data.position;
-    // }
+    const En_filaSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/mi_fila/'
+        + area_id
+        + '/'
+    );
+    En_filaSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        console.log(data)
+        //document.getElementById('area_id').value = data.position;
+    }
 
-    // chatSocket.onclose = function(e) {
-    //     console.error('Chat socket closed unexpectedly');
-    // };
+    En_filaSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
 }

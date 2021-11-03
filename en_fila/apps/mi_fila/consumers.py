@@ -1,8 +1,8 @@
 import json
 from asgiref.sync import async_to_sync
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
 
-class ChatConsumer(WebsocketConsumer):
+class En_filaConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['area_id']
         self.room_group_name = 'aera_%s' % self.room_name
@@ -23,26 +23,26 @@ class ChatConsumer(WebsocketConsumer):
         )
 
     # Receive message from WebSocket
-    async def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        message = text_data_json['message']
+    async def receive(self, next_position):
+        text_data_json = json.loads(next_position)
+        position = text_data_json['next_position']
 
         # Send message to room group
         await self.channel_layer.group_send(
             self.room_group_name,
             {
-                'type': 'chat_message',
-                'message': message
+                'type': 'next_position',
+                'position': position
             }
         )
 
     # Receive message from room group
-    async def chat_message(self, event):
-        message = event['message']
+    async def new_position(self, event):
+        position = event['next_position']
 
         # Send message to WebSocket
-        await self.send(text_data=json.dumps({
-            'message': message
+        await self.send(posicion=json.dumps({
+            'position': position
         }))
 
     
