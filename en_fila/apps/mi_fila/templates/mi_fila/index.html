@@ -1,7 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   {% block body %}
   Hola mundo en fila.
   Desde Mi Fila.
+  {{patient.persona}}
+  {{patient.lugar}}
+  <div id="area_id" name={{area.area_id}}>
+    {{patient.posicion}}
+  </div>
+  {% block script %}
+    <script type="text/javascript" src="{% static 'mi_fila/index.js' %}"></script>
+    
+    {% endblock %}
   {% endblock %}
 </html>
