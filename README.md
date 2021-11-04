@@ -1,2 +1,2 @@
 # En_fila
- App con entretenimiento y turnos.
+ App para hacer fila.
