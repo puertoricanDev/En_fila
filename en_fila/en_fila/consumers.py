@@ -23,25 +23,24 @@ class En_filaConsumer(AsyncWebsocketConsumer):
         )
 
     # Receive message from WebSocket
-    async def receive(self, next_position):
-        text_data_json = json.loads(next_position)
+    async def receive(self, text_data):
+        text_data_json = json.loads(text_data)
         position = text_data_json['next_position']
-
         # Send message to room group
         await self.channel_layer.group_send(
             self.room_group_name,
             {
-                'type': 'next_position',
+                'type': 'new_position',
                 'position': position
             }
         )
 
     # Receive message from room group
     async def new_position(self, event):
-        position = event['next_position']
+        position = event['position']
 
         # Send message to WebSocket
-        await self.send(posicion=json.dumps({
+        await self.send(text_data=json.dumps({
             'position': position
         }))
 

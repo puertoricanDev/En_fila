@@ -8,14 +8,14 @@ function get_position(){
     const En_filaSocket = new WebSocket(
         'ws://'
         + window.location.host
-        + '/ws/mi_fila/'
-        + area_id
+        + '/ws/mi_area/'
+        + 1
         + '/'
     );
     En_filaSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
         console.log(data)
-        //document.getElementById('area_id').value = data.position;
+        // document.getElementById('area_id').value = data.position;
     }
 
     En_filaSocket.onclose = function(e) {

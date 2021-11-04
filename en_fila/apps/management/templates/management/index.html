@@ -54,7 +54,7 @@
   const En_filaSocket = new WebSocket(
         'ws://'
         + window.location.host
-        + '/ws/mi_fila/'
+        + '/ws/mi_area/'
         + 1
         + '/'
     );
@@ -62,7 +62,7 @@
             //const messageInputDom = document.querySelector('#chat-message-input');
             //const message = messageInputDom.value;
             En_filaSocket.send(JSON.stringify({
-                'next_position': 2
+                'next_position': 150
             }));};
 </script>
   {% endblock %}
