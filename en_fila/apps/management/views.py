@@ -31,3 +31,5 @@ def managementpages(request):
             owner_areas.save()
     return render(request, "management/index.html")
 
+def fila_area(request):
+    return render(request, "management/filaarea.html")
