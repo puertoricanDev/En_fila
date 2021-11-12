@@ -19,3 +19,4 @@ class Suscribed(models.Model):
     first_suscription = models.DateTimeField(default=timezone.now)
     valid_to = models.DateTimeField(get_deadline())
     expired = models.BooleanField(default=False)
+    areas_suscribed = models.PositiveIntegerField(default=4)
