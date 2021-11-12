@@ -2,8 +2,7 @@
 
 ## This guide is for running development server.
 
-### Requirements:
-
+- Requirements:
     1. Install python and pip: 
         1. [https://realpython.com/installing-python/](Python)
         2. [https://phoenixnap.com/kb/install-pip-windows](pip)
