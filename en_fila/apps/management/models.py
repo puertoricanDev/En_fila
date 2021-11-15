@@ -9,6 +9,8 @@ class Owner_areas(models.Model):
     current_position = models.IntegerField(blank=False, default=0)
 
 class Employee(models.Model):
-    fila_admin = models.ManyToOneRel(
+    fila_admin = models.ForeignKey(
         "premium.Suscribed", on_delete=models.CASCADE)
     fila_employee = models.CharField(max_length=45)
+    employee_user = models.CharField(max_length=24)
+    employee_passcode = models.PositiveIntegerField(unique=True)

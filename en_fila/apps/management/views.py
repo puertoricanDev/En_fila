@@ -8,12 +8,16 @@ from ..premium.models import *
 
 def managementIndex(request):
     if request.user.is_authenticated:
+        owner = Suscribed.objects.get(suscriber=request.user)
         try:
-            owner_areas = Owner_areas.objects.filter(owner=request.user).all()
+            owner_areas = Owner_areas.objects.filter(owner=owner).all()
         except Owner_areas.DoesNotExist:
             return render(request, "management/index.html")
-        employee_list = Employee.objects.filter(owner=request.user).all()
-        return render(request, "management/index.html", employee_list, owner_areas)
+        employee_list = Employee.objects.filter(fila_admin=owner).all()
+        return render(request, "management/index.html", {
+            "employee_list":employee_list,
+            "owner_areas": owner_areas,
+            })
 
     else:
         return render(request, "premium/login.html")
@@ -22,23 +26,23 @@ def managementIndex(request):
 def managementpages(request):
     if request.method == "POST":
         owner = Suscribed.objects.get(suscriber=request.user)
-        print(owner.id)
-        for x in range(owner.areas_suscribed):
+        for x in range(0,owner.areas_suscribed+1):
             place_name = request.POST["place"+str(x)]
+            print(place_name)
             try:
                 owner_areas = Owner_areas.objects.get(owner=owner, area_id=x)
-                owner_areas.place_name = place_name
+                if place_name !="":
+                    owner_areas.place_name = place_name
+                    owner_areas.save()
             except Owner_areas.DoesNotExist:
                 owner_areas = Owner_areas(
                     owner=owner,
                     place_name=place_name,
                     area_id=x
                 )
-            owner_areas.save()
+                owner_areas.save()
     
-    else:
-
-    return render(request, "management/index.html",employee_list,owner_areas)
+        return managementIndex(request)
 
 def fila_area(request):
     return render(request, "management/filaarea.html")
