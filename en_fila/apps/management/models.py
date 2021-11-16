@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import AutoField
 from ..premium.models import Suscribed
 # Create your models here.
 
@@ -13,4 +14,4 @@ class Employee(models.Model):
         "premium.Suscribed", on_delete=models.CASCADE)
     fila_employee = models.CharField(max_length=45)
     employee_user = models.CharField(max_length=24)
-    employee_passcode = models.PositiveIntegerField(unique=True)
+    
