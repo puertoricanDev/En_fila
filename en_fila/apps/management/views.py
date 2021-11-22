@@ -44,9 +44,43 @@ def managementpages(request):
 
         return managementIndex(request)
 
+def loginempleado(request):
+    return render(request, "management/loginempleado.html")
 
-def fila_area(request):
-    return render(request, "management/filaarea.html")
+def areaselect(request):
+    user_empleado = request.GET.get("empleado")
+    user_id = request.GET.get("empleado_id")
+    try:
+       empleado = Employee.objects.get(id=user_id,employee_user=user_empleado)
+       areas = Owner_areas.objects.filter(owner = empleado.fila_admin).all()
+    except Employee.DoesNotExist:
+        message = "Login de empleado incorrecto, favor intentarlo de nuevo."
+        return render(request, "management/loginempleado.html",{
+            "message":message,
+        })
+    return render(request, "management/areaselect.html",{
+        "empleado":empleado,
+        "areas": areas,
+    })
+
+def filaarea(request):
+    empleado = request.GET.get("empleado")
+    id_area = request.GET.get("area")
+    accion = request.GET.get("accion")
+    area = Owner_areas.objects.get(id=id_area)
+    
+    if accion == "next":
+        area.current_position = area.current_position + 1
+        area.save()
+    
+    patient = mi_fila.objects.get(posicion=area.current_position, area_id=area.id, owner=area.owner)
+    return render(request, "management/filaarea.html",{
+        "area":area,
+        "patient":patient,
+        "empleado":empleado,
+    })
+
+
 
 
 def create_employee(request):
