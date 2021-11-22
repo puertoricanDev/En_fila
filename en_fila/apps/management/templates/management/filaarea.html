@@ -6,9 +6,10 @@
   <div id="area_id" name={{area.id}}>
     <div id="paciente" name={{patient.id}}></div>
     <div id="turno_actual" name={{area.current_position}}>
+      Empleado: {{empleado}}
       Area: {{area.place_name}}
       Turno actual: {{area.current_position}}
-      Nombre: {{patient.persona}}
+      Nombre: {{patient.persona}} {{message}}
 
     </div>
   </div>
@@ -17,6 +18,12 @@
     <input type="hidden" name="area" value = {{area.id}}>
     <input type="hidden" name="accion" value = "next">
      <button id="next">next</button>
+  </form>
+  <form action="{% url 'filaarea' %}" method="get" style="text-align: center; max-width: 40rem; margin: auto">
+    <input type="hidden" name="empleado" value = {{empleado}}>
+    <input type="hidden" name="area" value = {{area.id}}>
+    <input type="hidden" name="accion" value = "back">
+     <button id="next">back</button>
   </form>
   {% block script %}
     <script type="text/javascript" src="{% static 'management/filaarea.js' %}"></script>

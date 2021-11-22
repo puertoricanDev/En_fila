@@ -28,7 +28,6 @@ def managementpages(request):
         owner = Suscribed.objects.get(suscriber=request.user)
         for x in range(0, owner.areas_suscribed+1):
             place_name = request.POST["place"+str(x)]
-            print(place_name)
             try:
                 owner_areas = Owner_areas.objects.get(owner=owner, area_id=x)
                 if place_name != "":
@@ -71,9 +70,32 @@ def filaarea(request):
     
     if accion == "next":
         area.current_position = area.current_position + 1
-        area.save()
+        try:
+            patient = mi_fila.objects.get(
+                posicion=area.current_position, area_id=area.id, owner=area.owner)
+        except mi_fila.DoesNotExist:
+            area.current_position = area.current_position - 1
+            patient = mi_fila.objects.get(
+                posicion=area.current_position, area_id=area.id, owner=area.owner)
+    elif accion == "back" and area.current_position > 0:
+        area.current_position = area.current_position - 1
+        try:
+            patient = mi_fila.objects.get(
+                posicion=area.current_position, area_id=area.id, owner=area.owner)
+        except mi_fila.DoesNotExist:
+            area.current_position = area.current_position + 1
+            patient = mi_fila.objects.get(
+                posicion=area.current_position, area_id=area.id, owner=area.owner)
+    elif accion =="current":
+        try:
+            patient = mi_fila.objects.get(
+                posicion=area.current_position, area_id=area.id, owner=area.owner)
+            #if patient.persona == "":
+            #message = "No hay nadie En-Fila"
+        except mi_fila.DoesNotExist:
+            patient = "No hay nadie En-Fila"
     
-    patient = mi_fila.objects.get(posicion=area.current_position, area_id=area.id, owner=area.owner)
+    area.save()
     return render(request, "management/filaarea.html",{
         "area":area,
         "patient":patient,
