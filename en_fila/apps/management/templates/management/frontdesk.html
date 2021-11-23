@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block body %}
+      <form action="{% url 'addpatient' %}" method="get">
+        {% for owner_area in owner_areas %} 
+            {{owner_area.place_name}}<br />
+            <input
+                class="form-control"
+                type="text"
+                name="place{{owner_area.area_id}}"
+                placeholder="Nombre de Area"
+            />
+            <br />
+            <input class="btn btn-primary" type="submit" value="Add" />
+        {% endfor %}
+      </form>
+    {% endblock %}
+</body>
+</html>

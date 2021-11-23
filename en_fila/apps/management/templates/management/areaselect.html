@@ -5,12 +5,13 @@
   <div name="{{empleado.id}}">{{empleado.fila_employee}}<br /></div>
   <form
     action="{% url 'frontdesk' %}"
-    method="get"
+    method="post"
     style="text-align: center; max-width: 40rem; margin: auto"
   >
+  {% csrf_token %}
+  <h3>Front Desk</h3>
     <input type="hidden" name="empleado" value="{{empleado.fila_employee}}" />
-    <input type="hidden" name="accion" value="current" />
-    
+    <input type="hidden" name="owner" value="{{empleado.fila_admin.id}}" />
     <input type="submit" value="Front Desk" />
   </form>
   <form

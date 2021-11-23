@@ -14,6 +14,7 @@ from decimal import *
 from ..management.models import Owner_areas
 
 
+
 def mi_filaAPI(request):
     place_id = request.GET.get("fila")
     try:
@@ -26,5 +27,7 @@ def mi_filaAPI(request):
         "patient":patient.serialize(),
         "area":area
     })
+
+
         
     

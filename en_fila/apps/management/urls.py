@@ -11,5 +11,6 @@ urlpatterns = [
     path('areaselect/',views.areaselect, name="areaselect"),
     path('loginempleado/', views.loginempleado, name="loginempleado"),
     path('frontdesk',views.front_desk, name="frontdesk"),
+    path('addpatient', views.add_patient, name='addpatient'),
    
 ]

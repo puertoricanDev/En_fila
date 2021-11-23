@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('', views.mi_filaAPI, name='mi_filaAPI'),
+    path('addpatient', views.add_patient, name='addpatient'),
 ]
