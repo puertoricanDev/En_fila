@@ -127,4 +127,13 @@ def front_desk(request):
         "owner_areas": owner_areas,
         "empleado":empleado,
     })
-    
+
+
+def add_patient(request):
+    empleado = request.POST["empleado"]
+    owner_id = request.POST["owner"]
+    owner_areas = Owner_areas.objects.filter(owner=owner_id).all()
+    return render(request, "management/frontdesk.html", {
+        "owner_areas": owner_areas,
+        "empleado": empleado,
+    })
