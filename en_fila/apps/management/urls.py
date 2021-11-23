@@ -10,5 +10,6 @@ urlpatterns = [
     path('deleteemployee/', views.delete_employee, name='delete_employee'),
     path('areaselect/',views.areaselect, name="areaselect"),
     path('loginempleado/', views.loginempleado, name="loginempleado"),
+    path('frontdesk',views.front_desk, name="frontdesk"),
    
 ]

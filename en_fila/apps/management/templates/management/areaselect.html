@@ -1,23 +1,32 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% block body %}
-    <div name="{{empleado.id}}">
-        {{empleado.fila_employee}}
-    </div>
+  {% block body %}
+  <div name="{{empleado.id}}">{{empleado.fila_employee}}<br /></div>
+  <form
+    action="{% url 'frontdesk' %}"
+    method="get"
+    style="text-align: center; max-width: 40rem; margin: auto"
+  >
+    <input type="hidden" name="empleado" value="{{empleado.fila_employee}}" />
+    <input type="hidden" name="accion" value="current" />
     
-    <form action="{% url 'filaarea' %}" method="get" style="text-align: center; max-width: 40rem; margin: auto">
-    <input type="hidden" name="empleado" value = {{empleado.fila_employee}}>
-    <input type="hidden" name="accion" value = "current">
+    <input type="submit" value="Front Desk" />
+  </form>
+  <form
+    action="{% url 'filaarea' %}"
+    method="get"
+    style="text-align: center; max-width: 40rem; margin: auto"
+  >
+    <input type="hidden" name="empleado" value="{{empleado.fila_employee}}" />
+    <input type="hidden" name="accion" value="current" />
     <select required name="area" id="area" style="text-align: center">
       <option value="">None selected</option>
       {% for area in areas %}
-      <option value="{{area.id}}">
-        {{area.place_name}}
-      </option>
+      <option value="{{area.id}}">{{area.place_name}}</option>
       {% endfor %}
-      </select>
-      <input type="submit" value="Seleccionar">
-    </form>
-{% endblock %}
+    </select>
+    <input type="submit" value="Seleccionar" />
+  </form>
+  {% endblock %}
 </html>

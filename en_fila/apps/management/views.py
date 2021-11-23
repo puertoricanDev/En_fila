@@ -90,8 +90,7 @@ def filaarea(request):
         try:
             patient = mi_fila.objects.get(
                 posicion=area.current_position, area_id=area.id, owner=area.owner)
-            #if patient.persona == "":
-            #message = "No hay nadie En-Fila"
+            
         except mi_fila.DoesNotExist:
             patient = "No hay nadie En-Fila"
     
@@ -101,9 +100,6 @@ def filaarea(request):
         "patient":patient,
         "empleado":empleado,
     })
-
-
-
 
 def create_employee(request):
     if request.method == "POST":
@@ -122,3 +118,6 @@ def delete_employee(request):
         employee = Employee.objects.filter(id=employee_id)
         employee.delete()
     return managementIndex(request)
+
+def front_desk(request):
+    return render(request, "management/frontdesk.html")
