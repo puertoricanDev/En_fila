@@ -16,10 +16,10 @@ from ..management.models import Owner_areas
 
 
 def mi_filaAPI(request):
-    place_id = request.GET.get("fila")
+    patient_id = request.GET.get("fila")
     try:
-        patient = mi_fila.objects.get(persona_id= place_id)
-        area = Owner_areas.objects.get(area_id=patient.area_id)
+        patient = mi_fila.objects.get(id= patient_id)
+        area = patient.area_id
 
     except mi_fila.DoesNotExist:
         return JsonResponse({"message":"Id de paciente no encontrado, favor corroborar su numero e intentar de nuevo."})

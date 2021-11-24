@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import User
+from .models import Suscribed, User
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -23,6 +23,7 @@ def register(request):
         email = request.POST["email"]
         # Ensure password matches confirmation
         password = request.POST["password"]
+        business_name = request.POST["business_name"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
             return render(request, "premium/register.html", {
@@ -34,12 +35,18 @@ def register(request):
             user = User.objects.create_user(
                 username, email, password)
             user.save()
-
         except IntegrityError:
             return render(request, "premium/register.html", {
                 "message": "Username already taken."
             })
         login(request, user)
+        try:
+            suscribed = Suscribed(suscriber=user,business_name=business_name)
+            suscribed.save()
+        except IntegrityError:
+            return render(request, "premium/register.html", {
+                "message": "Can not suscribe user."
+            })
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "premium/register.html")

@@ -8,7 +8,8 @@
   >
     {% csrf_token %}
     <div class="form-group">
-      {% for owner_area in owner_areas %} {{owner_area.place_name}}<br />
+      {% for owner_area in owner_areas %}
+      {{owner_area.place_name}}<br />
       <input
         class="form-control"
         type="text"
