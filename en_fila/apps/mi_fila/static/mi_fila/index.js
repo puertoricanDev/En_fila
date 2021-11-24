@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function get_position(){
-    const area_id = document.getElementById('area_id').getAttribute('name');
+    var area_id = document.getElementById('area_id').getAttribute('name');
+    area_id = parseInt(area_id)+1
     const En_filaSocket = new WebSocket(
         'ws://'
         + window.location.host
@@ -14,6 +15,7 @@ function get_position(){
     En_filaSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
         document.querySelector('#area_id').innerHTML = data.position;
+        console.log(data)
     }
 
     En_filaSocket.onclose = function(e) {
