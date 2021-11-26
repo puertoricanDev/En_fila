@@ -9,10 +9,21 @@ function change_position(){
     "ws://" + window.location.host + "/ws/mi_area/" + `${area_id}` + "/"
   );
   
+  document.querySelector("#next").onclick = function (e) {
+    //const messageInputDom = document.querySelector('#chat-message-input');
+    //const message = messageInputDom.value;
     En_filaSocket.send(
       JSON.stringify({
-        next_position: next_position,
+        next_position: parseInt(next_position)+1,
       })
-    );
+    );}
+    document.querySelector("#back").onclick = function (e) {
+      //const messageInputDom = document.querySelector('#chat-message-input');
+      //const message = messageInputDom.value;
+      En_filaSocket.send(
+        JSON.stringify({
+          next_position: parseInt(next_position)-1,
+        })
+      );}
   
   };
