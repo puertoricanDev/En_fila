@@ -1,6 +1,8 @@
+{% extends "homepage/head.html" %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+  
   {% block body %}
   
   <div id="area_id" name={{area.id}}>
@@ -17,15 +19,14 @@
     <input type="hidden" name="empleado" value = {{empleado}}>
     <input type="hidden" name="area" value = {{area.id}}>
     <input type="hidden" name="accion" value = "next">
-     <button id="next">next</button>
+     <button class="btn btn-outline-primary" id="next">next</button>
   </form>
   <form action="{% url 'filaarea' %}" method="get" style="text-align: center; max-width: 40rem; margin: auto">
     <input type="hidden" name="empleado" value = {{empleado}}>
     <input type="hidden" name="area" value = {{area.id}}>
     <input type="hidden" name="accion" value = "back">
-     <button id="back">back</button>
+     <button class="btn btn-outline-warning" id="back">back</button>
   </form>
-  <button id="test">test</button>
   {% block script %}
     <script type="text/javascript" src="{% static 'management/filaarea.js' %}"></script>
     

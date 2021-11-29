@@ -15,7 +15,7 @@ function get_position(){
     En_filaSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
         document.querySelector('#area_id').innerHTML = data.position;
-        console.log(data)
+        
     }
 
     En_filaSocket.onclose = function(e) {

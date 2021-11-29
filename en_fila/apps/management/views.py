@@ -107,7 +107,7 @@ def filaarea(request):
 
         except mi_fila.DoesNotExist:
             patient = "No hay nadie En-Fila"
-    print(patient)
+    
     area.save()
     return render(request, "management/filaarea.html", {
         "area": area,
