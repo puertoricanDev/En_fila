@@ -81,7 +81,6 @@ def filaarea(request):
     id_area = request.GET.get("area")
     accion = request.GET.get("accion")
     area = Owner_areas.objects.get(id=id_area)
-    print(id_area)
     if accion == "next":
         area.current_position = area.current_position + 1
         try:

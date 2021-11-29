@@ -4,16 +4,23 @@
 <html lang="en">
   
   {% block body %}
-
-  Esta En-Fila para {{patient.lugar}}
-  {{patient.persona}}
-  Su posicion En-Fila es {{patient.posicion}}
-  
-  <div id="area_id" name={{patient.area_id}}>
-    
+	<br><br><br>
+  <div class="card text-white bg-primary mb-3" style="max-width: 25rem; margin:auto; text-align: center;">
+  <div class="card-header">Esta En-Fila para <b>{{patient.lugar}}</b></div>
+  <div class="card-body">
+    <h4 class="card-title">{{patient.persona}}</h4>
+    <p id="pteposicion" name={{patient.posicion}} class="card-text">Su posicion En-Fila es {{patient.posicion}}</p>
+    <div id="area_id" name={{patient.area_id}}></div>
+  <div class="card-footer">
+    <a href="http://en-fila.com">No es su En-Fila, click aqui para volver.</a>
+   </div>
   </div>
-  {% block script %}
-    <script type="text/javascript" src="{% static 'mi_fila/index.js' %}"></script>
+</div>
+<div class="card text-white bg-primary mb-3" style="max-width: 25rem; margin:auto; text-align: center;">
+<img src="{% static 'management/promo.jpg' %}">
+</div>
+    {% block script %}
+      <script type="text/javascript" src="{% static 'mi_fila/index.js' %}"></script>
     
     {% endblock %}
   {% endblock %}

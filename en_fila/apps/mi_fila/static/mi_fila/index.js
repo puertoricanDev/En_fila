@@ -14,7 +14,19 @@ function get_position(){
     );
     En_filaSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
-        document.querySelector('#area_id').innerHTML = data.position;
+        var pteposicion = document.getElementById('pteposicion').getAttribute('name');
+        if (parseInt(pteposicion) < parseInt(data.position)) {
+          document.querySelector("#area_id").innerHTML =
+            "Su turno ah pasado Gracias por utilizar En-Fila.";
+        } else if (pteposicion == data.position) {
+          document.querySelector("#area_id").innerHTML =
+            "Es su turno favor pasar por su area.";
+        } else if (pteposicion > data.position) {
+            var faltan =  pteposicion - data.position;
+          document.querySelector("#area_id").innerHTML =
+            `Hay ${faltan} antes que usted.`;
+        }
+        
         
     }
 
