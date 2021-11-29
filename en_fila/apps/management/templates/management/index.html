@@ -1,54 +1,64 @@
+{% extends "homepage/head.html" %}
 <!DOCTYPE html>
 <html lang="en">
   {% block body %}
   <form
-    action="{% url 'managementIndex' %}"
+    action="{% url 'managementpages' %}"
     method="post"
     style="text-align: center; max-width: 40rem; margin: auto"
   >
     {% csrf_token %}
     <div class="form-group">
+      {% for owner_area in owner_areas %}
+      {{owner_area.place_name}}<br />
       <input
         class="form-control"
         type="text"
-        name="place0"
+        name="place{{owner_area.area_id}}"
         placeholder="Nombre de Area"
-      />
+      /><br />
     </div>
-    <div class="form-group">
-      <input
-        class="form-control"
-        type="text"
-        name="place1"
-        placeholder="Nombre de Area"
-      />
-    </div>
-    <div class="form-group">
-      <input
-        class="form-control"
-        type="text"
-        name="place2"
-        placeholder="Nombre de Area"
-      />
-    </div>
-    <div class="form-group">
-      <input
-        class="form-control"
-        type="text"
-        name="place3"
-        placeholder="Nombre de Area"
-      />
-    </div>
-    <div class="form-group">
-      <input
-        class="form-control"
-        type="text"
-        name="place4"
-        placeholder="Nombre de Area"
-      />
-    </div>
+    <br />
+    {% endfor %}
     <input class="btn btn-primary" type="submit" value="Update" />
   </form>
-
-  {% endblock %}
+  <br /><br />
+  <form
+    action="{% url 'create_employee' %}"
+    method="post"
+    style="text-align: center; max-width: 40rem; margin: auto"
+  >
+    {% csrf_token %}
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Nombre del empleado"
+      name="fila_employee"
+      required
+    /><br /><br />
+    <input
+      class="form-control"
+      type="text"
+      placeholder="nombre de usuario"
+      name="employee_user"
+      required
+    />
+    <br /><br />
+    <input class="btn btn-primary" type="submit" value="Add Employee" />
+  </form>
+  <br /><br />
+  {% if employee_list %}
+  <form action="{% url 'delete_employee' %}" method="post" style="text-align: center; max-width: 40rem; margin: auto">
+    {% csrf_token %}
+    <select required name="employee_list" id="employee_list" style="text-align: center">
+      <option value="">None selected</option>
+      {% for employee in employee_list %}
+      <option value="{{employee.id}}">
+        User: {{employee.employee_user}} passcode: {{employee.id}}
+      </option>
+      {% endfor %}
+    </select><br>
+    <input class="btn btn-primary" type="submit" value="Delete Selected Employee" />
+  </form>
+  {% endif %} {% endblock %}
 </html>

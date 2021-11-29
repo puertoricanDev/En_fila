@@ -1,0 +1,15 @@
+{% extends "homepage/head.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% block body %}
+    {{message}}
+    <form action="{% url 'areaselect' %}" method="get">
+        Empleado:
+        <br><input type="text" name="empleado" placeholder="Nombre de usuario de empleado"><br>
+        Passcode:
+        <br><input type="password" name="empleado_id" id="empleado_id"><br>
+        <input class="btn btn-primary" type="submit" value="Login" /> 
+    </form>
+{% endblock %}
+</html>

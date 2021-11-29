@@ -1,5 +1,6 @@
+{% extends "homepage/head.html" %}
 {% block body %}
-<style></style>
+
 <h2 style="text-align: center">Login</h2>
 
 {% if message %}
@@ -10,7 +11,7 @@
   style="text-align: center; max-width: 40rem; margin: auto"
   action="{% url 'login' %}"
   method="post"
->
+> 
   {% csrf_token %}
   <div class="form-group">
     <input

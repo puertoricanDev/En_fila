@@ -11,15 +11,23 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from decimal import *
+from ..management.models import Owner_areas
+
 
 
 def mi_filaAPI(request):
-    place_id = request.GET.get("fila")
+    patient_id = request.GET.get("fila")
     try:
-        patient = mi_fila.objects.get(place_id= place_id)
-        print(patient.owner.id)
+        patient = mi_fila.objects.get(id= patient_id)
+        
+
     except mi_fila.DoesNotExist:
         return JsonResponse({"message":"Id de paciente no encontrado, favor corroborar su numero e intentar de nuevo."})
-    return JsonResponse(patient.serialize(), safe=False)
+    return render(request,"mi_fila/index.html", {
+        "patient":patient.serialize(),
+        
+    })
+
+
         
     

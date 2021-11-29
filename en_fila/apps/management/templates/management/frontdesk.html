@@ -1,0 +1,33 @@
+{% extends "homepage/head.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    {% block body %}
+      {% if new_patient %}
+      <div>
+        <h3>Paciente {{new_patient.persona}} creado con exito su id:{{new_patient.id}}</h3>
+      </div>
+      {% endif %}
+      {% for owner_area in owner_areas %}
+          <form action="{% url 'addpatient' %}" method="post">
+            {% csrf_token %}
+            {{owner_area.place_name}}<br />
+            <input
+                class="form-control"
+                type="text"
+                
+                name="name{{owner_area.area_id}}"
+                placeholder="Nombre de Area"
+            />
+            <input type="hidden" name="empleado" value="{{empleado}}" />
+            <input type="hidden" name="owner" value="{{owner_id}}" />
+            <input type="hidden" name="area_id" value="{{owner_area.area_id}}">
+            <br />
+            <input class="btn btn-primary" type="submit" value="Add" />
+          </form>  
+        {% endfor %}
+      
+    {% endblock %}
+</body>
+</html>

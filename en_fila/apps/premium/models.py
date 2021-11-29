@@ -14,8 +14,9 @@ def get_deadline():
 
 class Suscribed(models.Model):
     suscriber = models.ForeignKey("User", on_delete=models.CASCADE, related_name="suscriber")
-    bussiness_name = models.CharField(max_length=45)
-    business_phone = PhoneNumberField(null=False,blank=False,unique = False)
+    business_name = models.CharField(max_length=45)
+    business_phone = PhoneNumberField(blank=True,unique = False)
     first_suscription = models.DateTimeField(default=timezone.now)
-    valid_to = models.DateTimeField(get_deadline())
+    #valid_to = models.DateTimeField(get_deadline())
     expired = models.BooleanField(default=False)
+    areas_suscribed = models.PositiveIntegerField(default=4)
