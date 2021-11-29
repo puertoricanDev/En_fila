@@ -5,37 +5,41 @@
   <form
     action="{% url 'managementpages' %}"
     method="post"
-    style="text-align: center; max-width: 40rem; margin: auto"
+    style="text-align: center; max-width: 30rem; margin: auto"
   >
     {% csrf_token %}
-    <div class="form-group">
+    <div class="form-group" style="text-align: center;">
       {% for owner_area in owner_areas %}
-      {{owner_area.place_name}}<br />
+      <h3 style="text-align: center;" >{{owner_area.place_name}}</h3>
       <input
         class="form-control"
         type="text"
         name="place{{owner_area.area_id}}"
         placeholder="Nombre de Area"
-      /><br />
+        style="max-width: 30rem; margin: auto;"
+      />
     </div>
-    <br />
+    
     {% endfor %}
-    <input class="btn btn-primary" type="submit" value="Update" />
+    <br>
+    <input class="btn btn-outline-info" type="submit" style="text-align: center;display:block; margin: auto;" value="Update" />
   </form>
-  <br /><br />
+  <br /><hr>
   <form
     action="{% url 'create_employee' %}"
     method="post"
-    style="text-align: center; max-width: 40rem; margin: auto"
+    style="text-align: center; max-width: 30rem; margin: auto;"
   >
+  <hr>
     {% csrf_token %}
+    <h3>Añadir empleado:</h3>
     <input
       class="form-control"
       type="text"
       placeholder="Nombre del empleado"
       name="fila_employee"
       required
-    /><br /><br />
+    /><br />
     <input
       class="form-control"
       type="text"
@@ -43,14 +47,14 @@
       name="employee_user"
       required
     />
-    <br /><br />
-    <input class="btn btn-primary" type="submit" value="Add Employee" />
+    <br />
+    <input class="btn btn-outline-warning" type="submit" value="Add Employee" />
   </form>
-  <br /><br />
+  <br /><hr>
   {% if employee_list %}
-  <form action="{% url 'delete_employee' %}" method="post" style="text-align: center; max-width: 40rem; margin: auto">
+  <form action="{% url 'delete_employee' %}" method="post" style="text-align: center; max-width: 30rem; margin: auto">
     {% csrf_token %}
-    <select required name="employee_list" id="employee_list" style="text-align: center">
+    <select required class="form-select" name="employee_list" id="employee_list" style="text-align: center">
       <option value="">None selected</option>
       {% for employee in employee_list %}
       <option value="{{employee.id}}">
@@ -58,7 +62,7 @@
       </option>
       {% endfor %}
     </select><br>
-    <input class="btn btn-primary" type="submit" value="Delete Selected Employee" />
+    <input class="btn btn-outline-danger" type="submit" value="Delete Selected Employee" />
   </form>
   {% endif %} {% endblock %}
 </html>

@@ -4,17 +4,18 @@
 <html lang="en">
   
   {% block body %}
-  <div name="{{empleado.id}}">{{empleado.fila_employee}}<br /></div>
+  <br><br>
+  <h2 name="{{empleado.id}}" style="text-align: center; ">{{empleado.fila_employee}}<br /></h2>
   <form
     action="{% url 'frontdesk' %}"
     method="post"
     style="text-align: center; max-width: 40rem; margin: auto"
   >
   {% csrf_token %}
-  <h3>Front Desk</h3>
+  <h3 style="display: inline-block;">Front Desk</h3>
     <input type="hidden" name="empleado" value="{{empleado.fila_employee}}" />
     <input type="hidden" name="owner" value="{{empleado.fila_admin.id}}" />
-    <input type="submit" value="Front Desk" />
+    <input type="submit" style="display: inline-block;" value="Front Desk" />
   </form>
   <form
     action="{% url 'filaarea' %}"

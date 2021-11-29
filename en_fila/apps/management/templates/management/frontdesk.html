@@ -10,21 +10,22 @@
       </div>
       {% endif %}
       {% for owner_area in owner_areas %}
+      <br>
           <form action="{% url 'addpatient' %}" method="post">
             {% csrf_token %}
-            {{owner_area.place_name}}<br />
+            <h3>{{owner_area.place_name}}</h3>
             <input
                 class="form-control"
                 type="text"
-                
+                style="display: inline-block; text-align: center; max-width: 25rem;"
                 name="name{{owner_area.area_id}}"
                 placeholder="Nombre de Area"
             />
             <input type="hidden" name="empleado" value="{{empleado}}" />
             <input type="hidden" name="owner" value="{{owner_id}}" />
             <input type="hidden" name="area_id" value="{{owner_area.area_id}}">
-            <br />
-            <input class="btn btn-primary" type="submit" value="Add" />
+            <input class="btn btn-outline-primary" style="display: inline-block;" type="submit" value="Add" />
+            <br>
           </form>  
         {% endfor %}
       
