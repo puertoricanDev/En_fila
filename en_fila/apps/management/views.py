@@ -13,7 +13,7 @@ def managementIndex(request):
         owner = Suscribed.objects.get(suscriber=request.user)
         employee_list = Employee.objects.filter(fila_admin=owner).all()
         try:
-            owner_areas_test = Owner_areas.objects.get(owner=owner,area_id=0)
+            owner_areas_test = Owner_areas.objects.get(owner=owner, area_id=0)
         except Owner_areas.DoesNotExist:
             for x in range(0, owner.areas_suscribed+1):
                 owner_areas = Owner_areas(
@@ -81,6 +81,7 @@ def filaarea(request):
     id_area = request.GET.get("area")
     accion = request.GET.get("accion")
     area = Owner_areas.objects.get(id=id_area)
+    message=""
     if accion == "next":
         area.current_position = area.current_position + 1
         try:
@@ -88,8 +89,12 @@ def filaarea(request):
                 posicion=area.current_position, area_id=(area.id-1), owner=area.owner)
         except mi_fila.DoesNotExist:
             area.current_position = area.current_position - 1
-            patient = mi_fila.objects.get(
-                posicion=area.current_position, area_id=(area.id-1), owner=area.owner)
+            try:
+                patient = mi_fila.objects.get(
+                    posicion=area.current_position, area_id=(area.id-1), owner=area.owner)
+            except mi_fila.DoesNotExist:
+                patient = "No hay nadie En-Fila."
+                message = "No hay nadie En-Fila"
     elif accion == "back" and area.current_position > 0:
         area.current_position = area.current_position - 1
         try:
@@ -97,8 +102,12 @@ def filaarea(request):
                 posicion=area.current_position, area_id=(area.id-1), owner=area.owner)
         except mi_fila.DoesNotExist:
             area.current_position = area.current_position + 1
-            patient = mi_fila.objects.get(
-                posicion=area.current_position, area_id=(area.id-1), owner=area.owner)
+            try:
+                patient = mi_fila.objects.get(
+                    posicion=area.current_position, area_id=(area.id-1), owner=area.owner)
+            except mi_fila.DoesNotExist:
+                patient = "No hay nadie En-Fila."
+                message = "No hay nadie En-Fila"
     elif accion == "current":
         try:
             patient = mi_fila.objects.get(
@@ -106,12 +115,14 @@ def filaarea(request):
 
         except mi_fila.DoesNotExist:
             patient = "No hay nadie En-Fila"
-    
+            message = "No hay nadie En-Fila"
+
     area.save()
     return render(request, "management/filaarea.html", {
         "area": area,
         "patient": patient,
         "empleado": empleado,
+        "message":message,
     })
 
 
@@ -154,18 +165,22 @@ def add_patient(request):
     nombre = request.POST["name"+str(area_id)]
     area = owner_areas[int(area_id)].place_name
     try:
-        listado = mi_fila.objects.filter(owner_id=owner_id, owner_places=area).all()
-        next_posicion = max(list.posicion for list in listado)+1
+        listado = mi_fila.objects.filter(
+            owner_id=owner_id, owner_places=area).all()
+        if len(listado) == 0:
+            next_posicion = 1
+        else:
+            next_posicion = max(list.posicion for list in listado)+1
         new_patient = mi_fila(owner_id=owner_id, owner_places=area,
-                          persona=nombre, posicion=next_posicion, area_id=area_id)
+                              persona=nombre, posicion=next_posicion, area_id=area_id)
     except mi_fila.DoesNotExist:
         new_patient = mi_fila(owner_id=owner_id, owner_places=area,
-                          persona=nombre, posicion=1, area_id=area_id)
-    
+                              persona=nombre, posicion=1, area_id=area_id)
+
     new_patient.save()
     return render(request, "management/frontdesk.html", {
         "owner_areas": owner_areas,
         "empleado": empleado,
-        "new_patient":new_patient,
-        "owner_id":owner_id,
+        "new_patient": new_patient,
+        "owner_id": owner_id,
     })

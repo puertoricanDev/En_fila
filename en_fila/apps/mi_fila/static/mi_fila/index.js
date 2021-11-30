@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function get_position(){
     var area_id = document.getElementById('area_id').getAttribute('name');
-    area_id = parseInt(area_id)+1
+    area_id = parseInt(area_id)
     const En_filaSocket = new WebSocket(
         'ws://'
         + window.location.host

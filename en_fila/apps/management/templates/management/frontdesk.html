@@ -5,19 +5,20 @@
 <body>
     {% block body %}
       {% if new_patient %}
-      <div>
+      <div style=" text-align: center;">
         <h3>Paciente {{new_patient.persona}} creado con exito su id:{{new_patient.id}}</h3>
       </div>
       {% endif %}
       {% for owner_area in owner_areas %}
       <br>
+      <div style=" text-align: center; max-width: 40rem;margin: auto;">
           <form action="{% url 'addpatient' %}" method="post">
             {% csrf_token %}
             <h3>{{owner_area.place_name}}</h3>
             <input
                 class="form-control"
                 type="text"
-                style="display: inline-block; text-align: center; max-width: 25rem;"
+                style="max-width: 25rem;display: inline-block;"
                 name="name{{owner_area.area_id}}"
                 placeholder="Nombre de Area"
             />
@@ -27,8 +28,10 @@
             <input class="btn btn-outline-primary" style="display: inline-block;" type="submit" value="Add" />
             <br>
           </form>  
+          
         {% endfor %}
-      
+      <a href="{% url 'loginempleado' %}" class="btn btn-outline-secondary">Cambiar Area</a>
+      </div>
     {% endblock %}
 </body>
 </html>

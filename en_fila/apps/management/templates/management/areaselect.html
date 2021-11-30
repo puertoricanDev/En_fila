@@ -6,31 +6,35 @@
   {% block body %}
   <br><br>
   <h2 name="{{empleado.id}}" style="text-align: center; ">{{empleado.fila_employee}}<br /></h2>
+  <br><br>
   <form
     action="{% url 'frontdesk' %}"
     method="post"
-    style="text-align: center; max-width: 40rem; margin: auto"
+    style="text-align: center;  margin: auto;"
   >
   {% csrf_token %}
   <h3 style="display: inline-block;">Front Desk</h3>
     <input type="hidden" name="empleado" value="{{empleado.fila_employee}}" />
     <input type="hidden" name="owner" value="{{empleado.fila_admin.id}}" />
-    <input type="submit" style="display: inline-block;" value="Front Desk" />
+    <input type="submit" class="btn btn-outline-success" style="display: inline-block;" value="Front Desk" />
   </form>
+  <br><br>
   <form
     action="{% url 'filaarea' %}"
     method="get"
-    style="text-align: center; max-width: 40rem; margin: auto"
+    style="text-align: center; max-width: 25rem; margin: auto"
   >
     <input type="hidden" name="empleado" value="{{empleado.fila_employee}}" />
     <input type="hidden" name="accion" value="current" />
-    <select required name="area" id="area" style="text-align: center">
+    <select required class="form-select" name="area" id="area" style="text-align: center;display: inline-block;">
       <option value="">None selected</option>
       {% for area in areas %}
       <option value="{{area.id}}">{{area.place_name}}</option>
       {% endfor %}
     </select>
-    <input type="submit" value="Seleccionar" />
+    <input type="submit" style="display: inline-block;" class="btn btn-outline-info" value="Seleccionar" />
+    <a href="{% url 'loginempleado' %}" style="text-align: center;margin: auto;" class="btn btn-outline-secondary">Cambiar Area</a>
+  
   </form>
   {% endblock %}
 </html>
