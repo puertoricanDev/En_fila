@@ -1,11 +1,25 @@
 {% extends "homepage/head.html" %}
 <!DOCTYPE html>
 <html lang="en">
-  
-  {% block body %}
-  Hola mundo en fila.
+
+{% block body %}
+<br><br>
+<div style="text-align: center;">
+  <h2>Bienvenido a En-Fila</h2>
+  <h3>En-Fila es el mejor lugar para saber su posicion en fila.</h3>
+  <p>Luego de registrarse en donde recivirá servicio le indicaran un numero,
+    en el proximo recuadro favor escribir el mismo y presionar el boton Mi-Fila.
+  </p>
   {{message}}
-  {{request.user.date_joined}}
-  {{request.user.is_active}}
-  {% endblock %}
+  <form action="{% url 'mi_filaAPI' %}" method="get">
+    <input type="text" class="form-control" name="fila" style="display: inline-block; max-width: 25rem;"
+      placeholder="Número de fila"><br>
+    <input class="btn btn-outline-primary" type="submit" style="display: inline-block;" value="Mi-Fila" />
+  </form>
+</div>
+Empleado: <a href="{% url 'loginempleado' %}">Login</a>
+<hr>
+Dueño: <a href="{% url 'login' %}">Login</a>
+{% endblock %}
+
 </html>

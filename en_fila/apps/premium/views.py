@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from decimal import *
+from django.shortcuts import redirect
 
 
 def premiumUsr(request):
@@ -63,7 +64,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return redirect("http://127.0.0.1:8000/management/")
         else:
             return render(request, "premium/login.html", {
                 "message": "Invalid username and/or password."

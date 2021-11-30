@@ -22,7 +22,7 @@ def mi_filaAPI(request):
         
 
     except mi_fila.DoesNotExist:
-        return JsonResponse({"message":"Id de paciente no encontrado, favor corroborar su numero e intentar de nuevo."})
+        return render(request, "homepage/index.html",{"message":"Id de paciente no encontrado, favor corroborar su numero e intentar de nuevo."})
     return render(request,"mi_fila/index.html", {
         "patient":patient.serialize(),
         

@@ -1,6 +1,7 @@
 {% extends "homepage/head.html" %}
 {% block body %}
-
+<br>
+<a style="text-align: center;" href="{% url 'index' %}"><h2>En-fila</h2></a><br>
 <h2 style="text-align: center">Login</h2>
 
 {% if message %}
@@ -8,14 +9,14 @@
 {% endif %}
 
 <form
-  style="text-align: center; max-width: 40rem; margin: auto"
+  style="text-align: center; max-width: 30rem; margin: auto"
   action="{% url 'login' %}"
   method="post"
 > 
   {% csrf_token %}
   <div class="form-group">
     <input
-      style="text-align: center; max-width: 40rem; margin: auto"
+      style="text-align: center; max-width: 30rem; margin: auto"
       autofocus
       class="form-control"
       type="text"
@@ -25,7 +26,7 @@
   </div>
   <div class="form-group">
     <input
-      style="text-align: center; max-width: 40rem; margin: auto"
+      style="text-align: center; max-width: 30rem; margin: auto"
       class="form-control"
       type="password"
       name="password"
@@ -33,14 +34,14 @@
     />
   </div>
   <input
-    style="text-align: center; max-width: 40rem; margin: auto"
-    class="btn btn-primary"
+    style="text-align: center; max-width: 30rem; margin: auto"
+    class="btn btn-outline-primary"
     type="submit"
     value="Login"
   />
 </form>
 
-<div style="text-align: center; max-width: 40rem; margin: auto">
+<div style="text-align: center; max-width: 30rem; margin: auto">
   Don't have an account? <a href="{% url 'register' %}">Register here.</a>
 </div>
 {% endblock %}

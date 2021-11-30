@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   {% block body %}
+  
   <form
     action="{% url 'managementpages' %}"
     method="post"
@@ -23,7 +24,10 @@
     {% endfor %}
     <br>
     <input class="btn btn-outline-info" type="submit" style="text-align: center;display:block; margin: auto;" value="Update" />
+    
   </form>
+  <br>
+  <a class="btn btn-outline-dark" style="text-align: center; display:block; max-width: fit-content; margin: auto;" href="{% url 'logout' %}">Log Out</a>
   <br /><hr>
   <form
     action="{% url 'create_employee' %}"
@@ -64,5 +68,7 @@
     </select><br>
     <input class="btn btn-outline-danger" type="submit" value="Delete Selected Employee" />
   </form>
-  {% endif %} {% endblock %}
+  {% endif %}
+  
+  {% endblock %}
 </html>

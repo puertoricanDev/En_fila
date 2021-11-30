@@ -1,6 +1,7 @@
 {% extends "homepage/head.html" %}
 {% block body %}
-<style></style>
+<br>
+<a style="text-align: center;" href="{% url 'index' %}"><h2>En-fila</h2></a><br>
 <h2 style="text-align: center; max-width: 40rem; margin: auto">Register</h2>
 
 {% if message %}
@@ -55,7 +56,7 @@
       placeholder="Confirm Password"
     />
   </div>
-  <input class="btn btn-primary" type="submit" value="Register" />
+  <input class="btn btn-outline-primary" type="submit" value="Register" />
 </form>
 
 <div style="text-align: center; max-width: 40rem; margin: auto">
