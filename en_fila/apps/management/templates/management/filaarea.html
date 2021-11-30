@@ -9,7 +9,7 @@
   <div class="card-header" id="paciente" name={{patient.id}}>Area: {{area.place_name}}</div>
   <div class="card-body" id="turno_actual" name={{area.current_position}}>
     <h4 class="card-title">Empleado: {{empleado}}</h4>
-    <p class="card-text">Nombre: {{patient.persona}} {{message}}</p>
+    <h3 class="card-text"> <b> Nombre: {{patient.persona}} {{message}}</b></h3>
     <p class="card-text">Turno actual: {{area.current_position}}</p>
     <div class="card-footer">
       <a href="{% url 'loginempleado' %}" class="btn btn-outline-secondary">Cambiar Area</a>

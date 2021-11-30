@@ -64,7 +64,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return redirect("http://127.0.0.1:8000/management/")
+            return redirect("http://www.en-fila.com/management/")
         else:
             return render(request, "premium/login.html", {
                 "message": "Invalid username and/or password."

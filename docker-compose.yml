@@ -23,6 +23,6 @@ services:
     depends_on:
       - db
   redis:
-    image: "redis:5"
+    image: "redis"
     ports: 
       - "6379:6379"

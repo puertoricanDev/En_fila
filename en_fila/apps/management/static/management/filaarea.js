@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 function change_position(){
   area_id = document.querySelector("#area_id").getAttribute("name");
-  area_id = area_id+1;
+  area_id = parseInt(area_id);
   next_position = document.querySelector("#turno_actual").getAttribute("name");
   const En_filaSocket = new WebSocket(
     "ws://" + window.location.host + "/ws/mi_area/" + `${area_id}` + "/"
