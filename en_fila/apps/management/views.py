@@ -23,7 +23,7 @@ def managementIndex(request):
                 )
                 owner_areas.save()
             return managementIndex(request)
-        owner_areas = Owner_areas.objects.filter(owner=owner).all()
+        owner_areas = Owner_areas.objects.filter(owner=owner).all().order_by('area_id')
         return render(request, "management/index.html", {
             "employee_list": employee_list,
             "owner_areas": owner_areas,
@@ -64,7 +64,7 @@ def areaselect(request):
     try:
         empleado = Employee.objects.get(
             id=user_id, employee_user=user_empleado)
-        areas = Owner_areas.objects.filter(owner=empleado.fila_admin).all()
+        areas = Owner_areas.objects.filter(owner=empleado.fila_admin).all().order_by('area_id')
     except Employee.DoesNotExist:
         message = "Login de empleado incorrecto, favor intentarlo de nuevo."
         return render(request, "management/loginempleado.html", {
@@ -161,22 +161,22 @@ def front_desk(request):
 def add_patient(request):
     empleado = request.POST["empleado"]
     owner_id = request.POST["owner"]
-    area_id = request.POST["area_id"]
+    area_id = int(request.POST["area_id"])
     owner_areas = Owner_areas.objects.filter(owner=owner_id).all()
     nombre = request.POST["name"+str(area_id)]
-    area = owner_areas[int(area_id)].place_name
+    area = owner_areas[area_id].place_name
     try:
         listado = mi_fila.objects.filter(
-            owner_id=owner_id, owner_places=area).all()
+            owner_id=owner_id, area_id=area_id+1).all()
         if len(listado) == 0:
             next_posicion = 1
         else:
             next_posicion = max(list.posicion for list in listado)+1
         new_patient = mi_fila(owner_id=owner_id, owner_places=area,
-                              persona=nombre, posicion=next_posicion, area_id=int(area_id)+1)
+                              persona=nombre, posicion=next_posicion, area_id=area_id+1)
     except mi_fila.DoesNotExist:
         new_patient = mi_fila(owner_id=owner_id, owner_places=area,
-                              persona=nombre, posicion=1, area_id=int(area_id)+1)
+                              persona=nombre, posicion=1, area_id=area_id+1)
 
     new_patient.save()
     return render(request, "management/frontdesk.html", {
