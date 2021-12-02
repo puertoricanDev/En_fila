@@ -19,12 +19,13 @@ def mi_filaAPI(request):
     patient_id = request.GET.get("fila")
     try:
         patient = mi_fila.objects.get(id= patient_id)
-        
+        area = Owner_areas.objects.get(owner=patient.owner,area_id=(patient.area_id-1))
 
     except mi_fila.DoesNotExist:
         return render(request, "homepage/index.html",{"message":"Id de paciente no encontrado, favor corroborar su numero e intentar de nuevo."})
     return render(request,"mi_fila/index.html", {
         "patient":patient.serialize(),
+        "area_id":area.id,
         
     })
 

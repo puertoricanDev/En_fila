@@ -60,11 +60,13 @@ def loginempleado(request):
 
 def areaselect(request):
     user_empleado = request.GET.get("empleado")
-    user_id = request.GET.get("empleado_id")
+    user_id = int(request.GET.get("empleado_id"))
+    
     try:
         empleado = Employee.objects.get(
             id=user_id, employee_user=user_empleado)
         areas = Owner_areas.objects.filter(owner=empleado.fila_admin).all().order_by('area_id')
+        owner_id = empleado.fila_admin.id
     except Employee.DoesNotExist:
         message = "Login de empleado incorrecto, favor intentarlo de nuevo."
         return render(request, "management/loginempleado.html", {
@@ -73,48 +75,56 @@ def areaselect(request):
     return render(request, "management/areaselect.html", {
         "empleado": empleado,
         "areas": areas,
+        "owner":owner_id,
     })
 
 
 def filaarea(request):
     empleado = request.GET.get("empleado")
-    id_area = request.GET.get("area")
+    id_area = int(request.GET.get("area"))
     accion = request.GET.get("accion")
-    area = Owner_areas.objects.get(id=id_area)
-    print(id_area)
+    owner_id = int(request.GET.get("owner"))
+    owner = Suscribed.objects.get(id=owner_id)
+    area = Owner_areas.objects.get(owner=owner, area_id=id_area)
+    print(owner.suscriber.username)
     message=""
     if accion == "next":
         area.current_position = area.current_position + 1
         try:
             patient = mi_fila.objects.get(
-                posicion=area.current_position, area_id=(area.id), owner=area.owner)
+                posicion=area.current_position, area_id=(area.area_id+1), owner=area.owner)
         except mi_fila.DoesNotExist:
+            print("except 1")
             area.current_position = area.current_position - 1
             try:
                 patient = mi_fila.objects.get(
-                    posicion=area.current_position, area_id=(area.id), owner=area.owner)
+                    posicion=area.current_position, area_id=(area.area_id+1), owner=area.owner)
             except mi_fila.DoesNotExist:
                 patient = "No hay nadie En-Fila."
                 message = "No hay nadie En-Fila"
+                print("except 2")
     elif accion == "back" and area.current_position > 0:
         area.current_position = area.current_position - 1
         try:
             patient = mi_fila.objects.get(
-                posicion=area.current_position, area_id=(area.id), owner=area.owner)
+                posicion=area.current_position, area_id=(area.area_id+1), owner=area.owner)
         except mi_fila.DoesNotExist:
+            print("except 3")
             area.current_position = area.current_position + 1
             try:
                 patient = mi_fila.objects.get(
-                    posicion=area.current_position, area_id=(area.id), owner=area.owner)
+                    posicion=area.current_position, area_id=(area.area_id+1), owner=area.owner)
             except mi_fila.DoesNotExist:
                 patient = "No hay nadie En-Fila."
                 message = "No hay nadie En-Fila"
+                print("except 4")
     elif accion == "current":
         try:
             patient = mi_fila.objects.get(
-                posicion=area.current_position, area_id=(area.id), owner=area.owner)
+                posicion=area.current_position, area_id=(area.area_id+1), owner=area.owner)
 
         except mi_fila.DoesNotExist:
+            print(area.owner)
             patient = "No hay nadie En-Fila"
             message = "No hay nadie En-Fila"
 
@@ -124,6 +134,7 @@ def filaarea(request):
         "patient": patient,
         "empleado": empleado,
         "message":message,
+        "owner":owner_id,
     })
 
 
@@ -162,7 +173,7 @@ def add_patient(request):
     empleado = request.POST["empleado"]
     owner_id = request.POST["owner"]
     area_id = int(request.POST["area_id"])
-    owner_areas = Owner_areas.objects.filter(owner=owner_id).all()
+    owner_areas = Owner_areas.objects.filter(owner=owner_id).all().order_by("area_id")
     nombre = request.POST["name"+str(area_id)]
     area = owner_areas[area_id].place_name
     try:

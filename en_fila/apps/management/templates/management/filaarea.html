@@ -14,15 +14,17 @@
     <div class="card-footer">
       <a href="{% url 'loginempleado' %}" class="btn btn-outline-secondary">Cambiar Area</a>
       <form action="{% url 'filaarea' %}" method="get" style="display: inline-block;">
-    <input type="hidden" name="empleado" value = {{empleado}}>
-    <input type="hidden" name="area" value = {{area.id}}>
+    <input type="hidden" name="empleado" value = "{{empleado}}">
+    <input type="hidden" name="area" value = "{{area.area_id}}">
     <input type="hidden" name="accion" value = "back">
+    <input type="hidden" name="owner" value="{{owner}}"/>
      <button class="btn btn-outline-warning" id="back">Anterior</button>
   </form>
       <form action="{% url 'filaarea' %}" method="get" style="display: inline-block;">
-    <input type="hidden" name="empleado" value = {{empleado}}>
-    <input type="hidden" name="area" value = {{area.id}}>
+    <input type="hidden" name="empleado" value = "{{empleado}}">
+    <input type="hidden" name="area" value = "{{area.area_id}}">
     <input type="hidden" name="accion" value = "next">
+    <input type="hidden" name="owner" value="{{owner}}"/>
      <button class="btn btn-outline-primary" id="next">Proximo</button>
   </form>
   </div>

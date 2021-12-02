@@ -1,10 +1,13 @@
 {% extends "homepage/head.html" %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 {% block body %}
 <br><br>
 <div style="text-align: center;">
+  <a href="https://www.en-fila.com">
+  <img src="{% static 'management/logo.jpeg' %}" style="max-width: 20%;"></a>
   <h2>Bienvenido a En-Fila</h2>
   <h3>En-Fila es el mejor lugar para saber su posicion en fila.</h3>
   <p>Luego de registrarse en donde recivirá servicio le indicaran un numero,
@@ -13,13 +16,16 @@
   {{message}}
   <form action="{% url 'mi_filaAPI' %}" method="get">
     <input type="text" class="form-control" name="fila" style="display: inline-block; max-width: 25rem;"
-      placeholder="Número de fila"><br>
+      placeholder="Número de fila">
     <input class="btn btn-outline-primary" type="submit" style="display: inline-block;" value="Mi-Fila" />
   </form>
 </div>
+<div style="text-align: center;">
+  <hr>
 Empleado: <a href="{% url 'loginempleado' %}">Login</a>
 <hr>
 Dueño: <a href="{% url 'login' %}">Login</a>
+</div>
 {% endblock %}
 
 </html>

@@ -26,10 +26,11 @@
   >
     <input type="hidden" name="empleado" value="{{empleado.fila_employee}}" />
     <input type="hidden" name="accion" value="current" />
+    <input type="hidden" name="owner" value="{{empleado.fila_admin.id}}" />
     <select required class="form-select" name="area" id="area" style="text-align: center;display: inline-block;">
       <option value="">None selected</option>
       {% for area in areas %}
-      <option value="{{area.id}}">{{area.place_name}}</option>
+      <option value="{{area.area_id}}">{{area.place_name}}</option>
       {% endfor %}
     </select>
     <input type="submit" style="display: inline-block;" class="btn btn-outline-info" value="Seleccionar" />
